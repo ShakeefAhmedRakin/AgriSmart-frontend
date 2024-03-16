@@ -10,7 +10,7 @@ const History = () => {
 
   useEffect(() => {
     setLoading(true);
-    fetch(`https://bitsandbuild.vercel.app/history/${user.email}`)
+    fetch(`http://localhost:5000/history/${user.email}`)
       .then((res) => res.json())
       .then((data) => {
         setAllRecords(data);

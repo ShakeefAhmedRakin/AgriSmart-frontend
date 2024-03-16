@@ -16,7 +16,7 @@ const Seeds = () => {
 
   useEffect(() => {
     setLoading(true);
-    fetch(`https://bitsandbuild.vercel.app/seeds/${user.email}`)
+    fetch(`http://localhost:5000/seeds/${user.email}`)
       .then((res) => res.json())
       .then((data) => {
         setSeeds(data);
@@ -34,9 +34,7 @@ const Seeds = () => {
       return;
     }
 
-    fetch(
-      `https://bitsandbuild.vercel.app/seeds/${user.email}/${id}/increase/${amount}`
-    )
+    fetch(`http://localhost:5000/seeds/${user.email}/${id}/increase/${amount}`)
       .then((res) => res.json())
       .then((data) => {
         if (data.modifiedCount > 0) {
@@ -57,7 +55,7 @@ const Seeds = () => {
             },
           };
 
-          fetch("https://bitsandbuild.vercel.app/history", {
+          fetch("http://localhost:5000/history", {
             method: "POST",
             headers: {
               "Content-Type": "application/json", // Set the content type according to your data
@@ -105,9 +103,7 @@ const Seeds = () => {
       return;
     }
 
-    fetch(
-      `https://bitsandbuild.vercel.app/seeds/${user.email}/${id}/decrease/${amount}`
-    )
+    fetch(`http://localhost:5000/seeds/${user.email}/${id}/decrease/${amount}`)
       .then((res) => res.json())
       .then((data) => {
         if (data.modifiedCount > 0) {
@@ -128,7 +124,7 @@ const Seeds = () => {
             },
           };
 
-          fetch("https://bitsandbuild.vercel.app/history", {
+          fetch("http://localhost:5000/history", {
             method: "POST",
             headers: {
               "Content-Type": "application/json", // Set the content type according to your data
@@ -194,7 +190,7 @@ const Seeds = () => {
       warehouse: warehouse,
     };
 
-    fetch("https://bitsandbuild.vercel.app/seeds", {
+    fetch("http://localhost:5000/seeds", {
       method: "POST",
       headers: {
         "Content-Type": "application/json", // Set the content type according to your data

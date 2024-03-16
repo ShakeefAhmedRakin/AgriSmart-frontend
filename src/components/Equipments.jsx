@@ -12,7 +12,7 @@ const Equipments = () => {
 
   useEffect(() => {
     setLoading(true);
-    fetch(`https://bitsandbuild.vercel.app/equipments/${user.email}`)
+    fetch(`http://localhost:5000/equipments/${user.email}`)
       .then((res) => res.json())
       .then((data) => {
         setEquipments(data);
@@ -54,7 +54,7 @@ const Equipments = () => {
       availability: availability,
       quantity: quantity,
     };
-    fetch("https://bitsandbuild.vercel.app/equipments", {
+    fetch("http://localhost:5000/equipments", {
       method: "POST",
       headers: {
         "Content-Type": "application/json", // Set the content type according to your data

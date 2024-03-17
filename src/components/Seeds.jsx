@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import { BsMoisture } from "react-icons/bs";
 import { CiTempHigh } from "react-icons/ci";
 import { useNavigate } from "react-router-dom";
+import { IoMdAdd } from "react-icons/io";
+import { FaMinus } from "react-icons/fa6";
 import { toast } from "sonner";
 import useAuth from "../hooks/useAuth";
 
@@ -220,7 +222,7 @@ const Seeds = () => {
       {loading ? (
         <>
           <div className="h-screen flex items-center justify-center">
-            <span className="loading loading-bars loading-lg text-black"></span>
+            <span className="loading loading-bars loading-xl text-black"></span>
           </div>
         </>
       ) : (
@@ -254,94 +256,100 @@ const Seeds = () => {
                 </div>
                 <hr className="my-2" />
                 {/* DATA */}
-                {seeds.map((item) => (
-                  <div className="flex gap-4" key={item._id}>
-                    <div className=" bg-secondary text-white font-bold text-2xl flex items-center justify-center w-56 shadow-xl rounded-xl">
-                      {item.name}
-                    </div>
-                    <div className="flex-1 border-2 rounded-xl shadow-xl p-3">
-                      <hr className="mb-2" />
-                      {/* SENSOR DATA */}
-                      <div className="flex items-center gap-2">
-                        <div className="bg-cyan-500 text-white font-bold p-3 flex items-center gap-2 rounded-xl">
-                          <BsMoisture className="text-3xl"></BsMoisture>
-                          <span>{item.moisture} g/m³</span>
-                        </div>
-                        <div className="bg-red-500 text-white font-bold p-3 flex items-center gap-2 rounded-xl">
-                          <CiTempHigh className="text-3xl"></CiTempHigh>
-                          <span>{item.temperature} °C</span>
-                        </div>
+                <div className="grid grid-cols-1 xl:grid-cols-2 gap-4">
+                  {seeds.map((item) => (
+                    <div className="flex gap-4" key={item._id}>
+                      <div className=" bg-secondary text-white font-bold text-base xl:text-2xl xl:flex items-center min-w-52 justify-center shadow-xl rounded-xl hidden">
+                        {item.name}
                       </div>
-                      {/* BAR/CAPACITY */}
-                      <progress
-                        className={`progress ${
-                          item.volume / item.capacity < 0.3
-                            ? "progress-error"
-                            : ""
-                        } h-7 mt-2 progress-success w-[100%]`}
-                        value={item.volume}
-                        max={item.capacity}
-                      ></progress>
-                      <hr className="my-2" />
-                      {/* INFORMATION */}
-                      <div>
-                        <h1 className="my-1 font-medium">
-                          Warehouse:{" "}
-                          <span className="font-bold">{item.warehouse}</span>
-                        </h1>
-                        <h1 className="my-1 font-medium">
-                          Max Capacity:{" "}
-                          <span className="font-bold">{item.capacity} kg</span>
-                        </h1>
-                        <h1 className="my-1 font-medium">
-                          Current Capacity:{" "}
-                          <span className="font-bold">{item.volume} kg</span>
-                        </h1>
-                        <div className="flex items-center gap-3">
-                          <form
-                            onSubmit={(e) =>
-                              onIncreaseSubmit(e, item._id, item.name)
-                            }
-                          >
-                            <input
-                              type="number"
-                              className="input input-bordered rounded-r-none w-32"
-                              placeholder="Amount"
-                              required
-                              name="amount"
-                            />
-                            <button className="btn text-white bg-secondary hover:bg-secondary border-none uppercase mt-1 rounded-l-none">
-                              Add
-                            </button>
-                          </form>
-                          <form
-                            onSubmit={(e) =>
-                              onDecreaseSubmit(e, item._id, item.name)
-                            }
-                          >
-                            <input
-                              type="number"
-                              className="input input-bordered rounded-r-none w-32"
-                              placeholder="Amount"
-                              required
-                              name="amount"
-                            />
-                            <button className="btn text-white bg-secondary hover:bg-secondary border-none uppercase mt-1 rounded-l-none">
-                              Remove
-                            </button>
-                          </form>
-                          <button
-                            className="btn bg-primary text-white hover:bg-primary border-none"
-                            onClick={() => nagivate(`/history/${item._id}`)}
-                          >
-                            History
-                          </button>
+                      <div className=" border-2 rounded-xl shadow-xl p-3 w-full flex-1">
+                        <hr className="mb-2" />
+                        {/* SENSOR DATA */}
+                        <div className="flex items-center gap-2">
+                          <div className="bg-cyan-500 text-white font-bold p-3 flex items-center gap-2 rounded-xl">
+                            <BsMoisture className="text-3xl"></BsMoisture>
+                            <span>{item.moisture} g/m³</span>
+                          </div>
+                          <div className="bg-red-500 text-white font-bold p-3 flex items-center gap-2 rounded-xl">
+                            <CiTempHigh className="text-3xl"></CiTempHigh>
+                            <span>{item.temperature} °C</span>
+                          </div>
                         </div>
+                        {/* BAR/CAPACITY */}
+                        <progress
+                          className={`progress ${
+                            item.volume / item.capacity < 0.3
+                              ? "progress-error"
+                              : ""
+                          } h-7 mt-2 progress-success w-[100%]`}
+                          value={item.volume}
+                          max={item.capacity}
+                        ></progress>
+                        <hr className="my-2" />
+                        {/* INFORMATION */}
+                        <div>
+                          <h1 className="my-1 font-medium">
+                            Warehouse:{" "}
+                            <span className="font-bold">{item.warehouse}</span>
+                          </h1>
+                          <h1 className="my-1 font-medium">
+                            Max Capacity:{" "}
+                            <span className="font-bold">
+                              {item.capacity} kg
+                            </span>
+                          </h1>
+                          <h1 className="my-1 font-medium">
+                            Current Capacity:{" "}
+                            <span className="font-bold">{item.volume} kg</span>
+                          </h1>
+                          <div className="flex flex-col xl:flex-row items-start xl:items-center gap-3">
+                            <form
+                              onSubmit={(e) =>
+                                onIncreaseSubmit(e, item._id, item.name)
+                              }
+                              className="whitespace-nowrap"
+                            >
+                              <input
+                                type="number"
+                                className="input input-bordered rounded-r-none w-24"
+                                placeholder="Amount"
+                                required
+                                name="amount"
+                              />
+                              <button className="btn text-white bg-secondary hover:bg-secondary border-none uppercase mt-1 rounded-l-none">
+                                <IoMdAdd></IoMdAdd>
+                              </button>
+                            </form>
+                            <form
+                              onSubmit={(e) =>
+                                onDecreaseSubmit(e, item._id, item.name)
+                              }
+                              className="whitespace-nowrap"
+                            >
+                              <input
+                                type="number"
+                                className="input input-bordered rounded-r-none w-24"
+                                placeholder="Amount"
+                                required
+                                name="amount"
+                              />
+                              <button className="btn text-white bg-secondary hover:bg-secondary border-none uppercase mt-1 rounded-l-none">
+                                <FaMinus></FaMinus>
+                              </button>
+                            </form>
+                            <button
+                              className="btn bg-primary text-white hover:bg-primary border-none"
+                              onClick={() => nagivate(`/history/${item._id}`)}
+                            >
+                              History
+                            </button>
+                          </div>
+                        </div>
+                        <hr className="mt-2" />
                       </div>
-                      <hr className="mt-2" />
                     </div>
-                  </div>
-                ))}
+                  ))}
+                </div>
               </div>
             </>
           ) : (
@@ -372,7 +380,7 @@ const Seeds = () => {
                 <input
                   type="text"
                   name="name"
-                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-xl focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                   placeholder="Seed Name"
                   required
                 />
@@ -384,7 +392,7 @@ const Seeds = () => {
                 <input
                   type="text"
                   name="warehouse"
-                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "
+                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-xl focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "
                   placeholder="Warehouse Name"
                   required
                 />
@@ -398,7 +406,7 @@ const Seeds = () => {
                 <input
                   type="number"
                   name="temperature"
-                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5 "
+                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-xl block w-full p-2.5 "
                   placeholder="°C"
                   required
                 />
@@ -410,7 +418,7 @@ const Seeds = () => {
                 <input
                   type="number"
                   name="moisture"
-                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5 "
+                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-xl block w-full p-2.5 "
                   placeholder="g/m³"
                   required
                 />
@@ -424,7 +432,7 @@ const Seeds = () => {
                 <input
                   type="number"
                   name="volume"
-                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5 "
+                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-xl block w-full p-2.5 "
                   placeholder="kg"
                   required
                 />
@@ -436,7 +444,7 @@ const Seeds = () => {
                 <input
                   type="number"
                   name="capacity"
-                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5 "
+                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-xl block w-full p-2.5 "
                   placeholder="kg"
                   required
                 />

@@ -39,7 +39,7 @@ const Root = () => {
               <span className="text-xs">Menu</span>
               <TbLayoutSidebarLeftExpandFilled />
             </label>
-            <div className="p-2 md:p-4 md:h-full ml-0 md:ml-[333px]">
+            <div className="p-2 md:p-4 md:h-full ml-0 md:ml-[228px]">
               <hr className="mt-[54px] block md:hidden" />
               <Outlet />
             </div>
@@ -56,7 +56,7 @@ const Root = () => {
                 <div className="text-secondary flex items-center gap-4">
                   <FaSeedling className="text-3xl text-primary"></FaSeedling>
                   <h1 className="font-heading text-xl md:text-3xl font-bold">
-                    AgriBlockStorage
+                    AgriSmart
                   </h1>
                 </div>
                 <label
@@ -77,6 +77,17 @@ const Root = () => {
                   }`}
                 >
                   <li className="">Dashboard</li>
+                </NavLink>
+                <NavLink
+                  to={"/soils"}
+                  onClick={closeSidebar}
+                  className={`p-2 w-full border-2 hover:underline rounded-xl ${
+                    location.pathname === "/soils"
+                      ? "text-primary font-bold"
+                      : ""
+                  } `}
+                >
+                  <li className="">Soil Monitoring</li>
                 </NavLink>
                 <NavLink
                   to={"/seeds"}

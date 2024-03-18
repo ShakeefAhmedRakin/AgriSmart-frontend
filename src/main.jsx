@@ -12,6 +12,7 @@ import Register from "./components/Register/Register";
 import AuthProvider from "./providers/AuthProvider";
 import PrivateRoute from "./routes/PrivateRoute";
 import { Toaster } from "sonner";
+import Soils from "./components/Soils";
 
 const router = createBrowserRouter([
   {
@@ -36,6 +37,14 @@ const router = createBrowserRouter([
         element: (
           <PrivateRoute>
             <Seeds></Seeds>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/soils",
+        element: (
+          <PrivateRoute>
+            <Soils></Soils>
           </PrivateRoute>
         ),
       },

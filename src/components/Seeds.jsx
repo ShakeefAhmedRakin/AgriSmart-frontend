@@ -262,7 +262,7 @@ const Seeds = () => {
                       <div className=" bg-secondary text-white font-bold text-base xl:text-2xl xl:flex items-center min-w-52 justify-center shadow-xl rounded-xl hidden">
                         {item.name}
                       </div>
-                      <div className=" border-2 rounded-xl shadow-xl p-3 w-full flex-1">
+                      <div className=" border rounded-xl p-3 w-full flex-1">
                         <hr className="mb-2" />
                         {/* SENSOR DATA */}
                         <div className="flex items-center gap-2">

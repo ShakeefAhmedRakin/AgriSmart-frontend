@@ -90,6 +90,17 @@ const Root = () => {
                   <li className="">Soil Monitoring</li>
                 </NavLink>
                 <NavLink
+                  to={"/crops"}
+                  onClick={closeSidebar}
+                  className={`p-2 w-full border-2 hover:underline rounded-xl ${
+                    location.pathname === "/crops"
+                      ? "text-primary font-bold"
+                      : ""
+                  } `}
+                >
+                  <li className="">Crop Monitoring</li>
+                </NavLink>
+                <NavLink
                   to={"/seeds"}
                   onClick={closeSidebar}
                   className={`p-2 w-full border-2 hover:underline rounded-xl ${

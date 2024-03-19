@@ -75,6 +75,18 @@ const Soils = () => {
         setReloadData(true);
         document.getElementById("addsoilmodal").close();
         console.log("Success:", data);
+        fetch("http://localhost:5000/crops", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            email: user.email,
+            isEmpty: true,
+            name: name,
+            type: type,
+          }),
+        });
       })
       .catch((error) => {
         console.error("Error:", error);
@@ -124,7 +136,7 @@ const Soils = () => {
                           <h1 className="text-xl flex items-center gap-1 font-medium">
                             Temperature
                             <span className="text-gray-500 text-sm">
-                              ~ 5 minutes ago
+                              ~ {getRandomInt(0, 5)} minutes ago
                             </span>
                           </h1>
                           <div className="flex justify-center items-center py-8">
@@ -138,7 +150,7 @@ const Soils = () => {
                           <h1 className="text-xl flex items-center gap-1 font-medium">
                             Moisture
                             <span className="text-gray-500 text-sm">
-                              ~ 5 minutes ago
+                              ~ {getRandomInt(0, 5)} minutes ago
                             </span>
                           </h1>
                           <div className="flex justify-center items-center py-8">
@@ -152,7 +164,7 @@ const Soils = () => {
                           <h1 className="text-xl flex items-center gap-1 font-medium">
                             pH Level
                             <span className="text-gray-500 text-sm">
-                              ~ 5 minutes ago
+                              ~ {getRandomInt(0, 5)} minutes ago
                             </span>
                           </h1>
                           <div className="flex justify-center items-center py-8">
@@ -166,7 +178,7 @@ const Soils = () => {
                           <h1 className="text-xl flex items-center gap-1 font-medium">
                             Nutrient Level
                             <span className="text-gray-500 text-sm">
-                              ~ 5 minutes ago
+                              ~ {getRandomInt(0, 5)} minutes ago
                             </span>
                           </h1>
                           <div className="flex gap-5 flex-wrap">

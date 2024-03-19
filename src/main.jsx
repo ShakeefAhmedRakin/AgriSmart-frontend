@@ -13,6 +13,7 @@ import AuthProvider from "./providers/AuthProvider";
 import PrivateRoute from "./routes/PrivateRoute";
 import { Toaster } from "sonner";
 import Soils from "./components/Soils";
+import Crop from "./components/Crop";
 
 const router = createBrowserRouter([
   {
@@ -45,6 +46,14 @@ const router = createBrowserRouter([
         element: (
           <PrivateRoute>
             <Soils></Soils>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/crops",
+        element: (
+          <PrivateRoute>
+            <Crop></Crop>
           </PrivateRoute>
         ),
       },

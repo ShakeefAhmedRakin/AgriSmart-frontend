@@ -37,7 +37,7 @@ const Crop = () => {
               <div className="space-y-4">
                 <hr className="my-2" />
                 {/* DATA */}
-                <div className="space-y-2 gap-4">
+                <div className="space-y-4 gap-4">
                   {crops.map((item) => (
                     <CropCard
                       key={item._id}

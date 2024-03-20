@@ -6,6 +6,7 @@ import { FaPlantWilt } from "react-icons/fa6";
 import { MdPestControl } from "react-icons/md";
 import { FaLightbulb } from "react-icons/fa";
 import { BsBug } from "react-icons/bs";
+import { Tooltip } from "react-tooltip";
 
 const CropCard = ({ item, setReloadData }) => {
   const [showaddUI, setShowAddUI] = useState(false);
@@ -52,19 +53,60 @@ const CropCard = ({ item, setReloadData }) => {
   const info = [];
 
   const plantStage = [
-    [{ name: "Germination", color: "text-blue-600" }],
-    [{ name: "Vegetative", color: "text-green-600" }],
-    [{ name: "Flowering", color: "text-yellow-600" }],
-    [{ name: "Fruiting", color: "text-orange-600" }],
-    [{ name: "Maturation", color: "text-red-600" }],
-    [{ name: "Harvesting", color: "text-purple-600" }],
+    [
+      {
+        name: "Germination",
+        color: "text-blue-600",
+        tooltip:
+          "<p><strong>Germination:</strong> The stage where the seed sprouts. Keep the soil consistently moist but not waterlogged. Provide warmth and indirect sunlight.</p>",
+      },
+    ],
+    [
+      {
+        name: "Vegetative",
+        color: "text-green-600",
+        tooltip:
+          "<p><strong>Vegetative:</strong> Focus on providing ample water and nutrients. Ensure the plant receives plenty of sunlight. Watch out for pests and diseases.</p>",
+      },
+    ],
+    [
+      {
+        name: "Flowering",
+        color: "text-yellow-600",
+        tooltip:
+          "<p><strong>Flowering:</strong> Support the plant's growth with stakes or trellises if necessary. Ensure consistent watering and provide a balanced fertilizer to promote flower development.</p>",
+      },
+    ],
+    [
+      {
+        name: "Fruiting",
+        color: "text-orange-600",
+        tooltip:
+          "<p><strong>Fruiting:</strong> Continue regular watering and fertilization. Monitor the plant for pests and diseases, especially those that target fruits. Provide support for heavy fruiting.</p>",
+      },
+    ],
+    [
+      {
+        name: "Maturation",
+        color: "text-red-600",
+        tooltip:
+          "<p><strong>Maturation:</strong> Reduce watering slightly to prevent fruit splitting. Monitor ripeness indicators such as color and firmness. Harvest when fruits are fully mature.</p>",
+      },
+    ],
+    [
+      {
+        name: "Harvesting",
+        color: "text-purple-600",
+        tooltip:
+          "<p><strong>Harvesting:</strong> Harvest fruits when they are fully ripe. Use appropriate tools to avoid damage to the plant. Store harvested produce properly to maintain freshness.</p>",
+      },
+    ],
   ];
 
   // Using a for loop to generate JSX elements
   for (let i = 0; i < item.number; i++) {
     const randomIndex = getRandomInt(0, 5);
     const hasPest = getRandomInt(0, 1);
-    const hasLight = getRandomInt(0, 1);
     const moisture = getRandomFloat(50, 100);
     const temp = getRandomFloat(20, 30);
 
@@ -79,13 +121,23 @@ const CropCard = ({ item, setReloadData }) => {
           {/* STATS */}
           <div className="space-y-2 col-span-2">
             <div className="py-3 w-full px- rounded-xl border flex gap-6 justify-center">
-              <div className="flex justify-center items-center py-4 gap-1 min-w-28">
+              <div
+                className="flex justify-center items-center py-4 gap-1 min-w-28"
+                data-tooltip-id="temp-tip"
+                data-tooltip-html="Maintain optimal temperatures for plant growth. Use shade cloth or mulch to protect plants from extreme heat. Monitor temperature fluctuations, as sudden drops can harm tender plants.</p>"
+              >
                 <CiTempHigh className="text-4xl text-red-500"></CiTempHigh>
                 <span className="text-base font-medium">{temp} °C</span>
+                <Tooltip id="temp-tip" className="max-w-xs" />
               </div>
-              <div className="flex justify-center items-center py-4 gap-1 min-w-28">
+              <div
+                className="flex justify-center items-center py-4 gap-1 min-w-28"
+                data-tooltip-id="moisture-tip"
+                data-tooltip-html="Ensure the soil remains consistently moist, but not waterlogged. Stick your finger into the soil; if it feels dry at a depth of about an inch, it's time to water. Overwatering can lead to root rot, while underwatering can stress the plant.</p>"
+              >
                 <IoWaterOutline className="text-3xl text-blue-500"></IoWaterOutline>
                 <span className="text-base font-medium">{moisture} g/m³</span>
+                <Tooltip id="moisture-tip" className="max-w-xs" />
               </div>
               <h1 className="ml-2 text-xs flex items-center gap-1 min-w-28 font-medium justify-center">
                 <span className="text-gray-500">
@@ -94,7 +146,11 @@ const CropCard = ({ item, setReloadData }) => {
               </h1>
             </div>
             <div className="py-3 w-full px- rounded-xl border flex gap-6 justify-center">
-              <div className="flex justify-center items-center py-4 gap-2  min-w-28">
+              <div
+                className="flex justify-center items-center py-4 gap-2  min-w-28"
+                data-tooltip-id={plantStage[randomIndex][0].name}
+                data-tooltip-html={plantStage[randomIndex][0].tooltip}
+              >
                 <FaPlantWilt
                   className={`text-3xl ${plantStage[randomIndex][0].color}`}
                 ></FaPlantWilt>
@@ -103,8 +159,16 @@ const CropCard = ({ item, setReloadData }) => {
                 >
                   {plantStage[randomIndex][0].name}
                 </span>
+                <Tooltip
+                  id={plantStage[randomIndex][0].name}
+                  className="max-w-xs"
+                />
               </div>
-              <div className="flex justify-center items-center py-4 gap-2  min-w-28">
+              <div
+                className="flex justify-center items-center py-4 gap-2  min-w-28"
+                data-tooltip-id="bug-tip"
+                data-tooltip-html="Regularly inspect plants for signs of pests such as holes in leaves, discoloration, or sticky residue. Avoid overusing chemical pesticides to maintain a healthy balance of beneficial insects in your garden.</p>"
+              >
                 <MdPestControl
                   className={`text-3xl ${
                     hasPest ? "text-red-500" : "text-green-500"
@@ -117,17 +181,14 @@ const CropCard = ({ item, setReloadData }) => {
                 >
                   {hasPest ? "Detected" : "None"}
                 </span>
+                <Tooltip id="bug-tip" className="max-w-xs" />
               </div>
               <div className="flex justify-center items-center py-4 gap-2  min-w-28">
                 <FaLightbulb
                   className={`text-3xl text-yellow-400`}
                 ></FaLightbulb>
-                <span
-                  className={`text-[11px] font-bold ${
-                    hasLight ? "text-red-500" : "text-green-500"
-                  }`}
-                >
-                  {hasLight ? "Low" : "Optimum"}
+                <span className={`text-[12px] font-bold text-green-500`}>
+                  ON
                 </span>
               </div>
             </div>
@@ -135,28 +196,35 @@ const CropCard = ({ item, setReloadData }) => {
           {/* ALERTS */}
           <div className="absolute -right-1 -top-2 flex gap-1">
             {moisture < 65 && (
-              <div className="bg-red-500 p-1.5 rounded-full border-0">
+              <div
+                className="bg-red-500 p-1.5 rounded-full border-0 tooltip tooltip-error tooltip-left"
+                data-tip="Low Moisture"
+              >
                 <IoWaterOutline className="text-white text-xl"></IoWaterOutline>
               </div>
             )}
             {temp < 22 && (
-              <div className="bg-blue-300 p-1.5 rounded-full border-0">
+              <div
+                className="bg-blue-300 p-1.5 rounded-full border-0 tooltip tooltip-error tooltip-left"
+                data-tip="Low Temperature"
+              >
                 <CiTempHigh className="text-white text-2xl"></CiTempHigh>
               </div>
             )}
             {temp > 28 && (
-              <div className="bg-red-500 p-1.5 rounded-full border-0">
+              <div
+                className="bg-red-500 p-1.5 rounded-full border-0 tooltip tooltip-error tooltip-left"
+                data-tip="High Temperature"
+              >
                 <CiTempHigh className="text-white text-2xl"></CiTempHigh>
               </div>
             )}
             {hasPest === 1 && (
-              <div className="bg-red-500 p-1.5 rounded-full border-0">
+              <div
+                className="bg-red-500 p-1.5 rounded-full border-0 tooltip tooltip-error tooltip-left"
+                data-tip="Pests Detected"
+              >
                 <BsBug className="text-white text-xl"></BsBug>
-              </div>
-            )}
-            {hasLight === 1 && (
-              <div className="bg-red-500 p-1.5 rounded-full border-0">
-                <FaLightbulb className="text-white text-xl"></FaLightbulb>
               </div>
             )}
           </div>
@@ -167,7 +235,7 @@ const CropCard = ({ item, setReloadData }) => {
 
   return (
     <>
-      <div className="border rounded-xl p-3" key={item._id}>
+      <div className="border rounded-xl p-3 even:bg-gray-100" key={item._id}>
         <div className="flex items-center gap-2">
           <span className="bg-secondary text-white p-2 rounded-xl font-bold">
             {item.name}
@@ -250,6 +318,7 @@ const CropCard = ({ item, setReloadData }) => {
           </>
         )}
       </div>
+      <hr />
     </>
   );
 };

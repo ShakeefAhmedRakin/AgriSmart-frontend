@@ -4,6 +4,7 @@ import { CiTempHigh } from "react-icons/ci";
 import { IoWaterOutline } from "react-icons/io5";
 import { IoIosWater } from "react-icons/io";
 import { toast } from "sonner";
+import { Tooltip } from "react-tooltip";
 
 const Soils = () => {
   const { user } = useAuth();
@@ -139,11 +140,16 @@ const Soils = () => {
                               ~ {getRandomInt(0, 5)} minutes ago
                             </span>
                           </h1>
-                          <div className="flex justify-center items-center py-8">
+                          <div
+                            className="flex justify-center items-center py-8"
+                            data-tooltip-id="temp-soil-tip"
+                            data-tooltip-html="Monitor soil temperature, aiming for an ideal range suitable for plant growth. Warm-season crops prefer warmer soil, while cool-season crops thrive in slightly cooler soil. Consider using mulch to regulate soil temperature and protect roots from extreme fluctuations.</p>"
+                          >
                             <CiTempHigh className="text-6xl text-red-500"></CiTempHigh>
                             <span className="text-3xl font-medium">
                               {item.sensorData.temperature} °C
                             </span>
+                            <Tooltip id="temp-soil-tip" className="max-w-xs" />
                           </div>
                         </div>
                         <div className="py-5 w-full max-w-xs px-8 rounded-xl border">
@@ -153,11 +159,19 @@ const Soils = () => {
                               ~ {getRandomInt(0, 5)} minutes ago
                             </span>
                           </h1>
-                          <div className="flex justify-center items-center py-8">
+                          <div
+                            className="flex justify-center items-center py-8"
+                            data-tooltip-id="moisture-soil-tip"
+                            data-tooltip-html="Ensure the soil maintains adequate moisture levels, as it's crucial for plant health. Check soil moisture regularly by inserting your finger into the soil; if it feels dry about an inch below the surface, it's time to water. Avoid overwatering, which can lead to root rot, and under-watering, which can stress plants. Consider using mulch to retain moisture and reduce evaporation.</p>"
+                          >
                             <IoWaterOutline className="text-6xl text-blue-500"></IoWaterOutline>
                             <span className="text-3xl font-medium">
                               {item.sensorData.moistureLevel} g/m³
                             </span>
+                            <Tooltip
+                              id="moisture-soil-tip"
+                              className="max-w-xs"
+                            />
                           </div>
                         </div>
                         <div className="py-5 w-full max-w-xs px-8 rounded-xl border">
@@ -167,11 +181,16 @@ const Soils = () => {
                               ~ {getRandomInt(0, 5)} minutes ago
                             </span>
                           </h1>
-                          <div className="flex justify-center items-center py-8">
+                          <div
+                            className="flex justify-center items-center py-8"
+                            data-tooltip-id="ph-soil-tip"
+                            data-tooltip-html="Monitor and adjust soil pH to ensure optimal nutrient availability for plants. To raise pH (make soil less acidic), add lime. To lower pH (make soil more acidic), add sulfur or acidic compost. Regularly check soil pH to maintain a healthy growing environment for your plants.</p>"
+                          >
                             <IoIosWater className="text-6xl text-orange-500"></IoIosWater>
                             <span className="text-3xl font-medium">
                               {item.sensorData.pHLevel} pH
                             </span>
+                            <Tooltip id="ph-soil-tip" className="max-w-xs" />
                           </div>
                         </div>
                         <div className="py-5 px-8 rounded-xl border">
@@ -181,7 +200,11 @@ const Soils = () => {
                               ~ {getRandomInt(0, 5)} minutes ago
                             </span>
                           </h1>
-                          <div className="flex gap-5 flex-wrap">
+                          <div
+                            className="flex gap-5 flex-wrap"
+                            data-tooltip-id="nut-soil-tip"
+                            data-tooltip-html="Ensure your soil has adequate levels of nutrients. Nitrogen promotes leafy growth and overall plant vigor, phosphorus supports root development, flowering, and fruiting, while potassium aids in disease resistance and overall plant health. Amend soil as needed using organic fertilizers or compost rich in these essential nutrients.</p>"
+                          >
                             <div className="flex justify-center items-center py-8 flex-col gap-2">
                               <span className="text-2xl font-bold text-gray-600">
                                 Nitrogen
@@ -206,6 +229,7 @@ const Soils = () => {
                                 {item.sensorData.nutrientLevels.potassium} ppm
                               </span>
                             </div>
+                            <Tooltip id="nut-soil-tip" className="max-w-xs" />
                           </div>
                         </div>
                       </div>

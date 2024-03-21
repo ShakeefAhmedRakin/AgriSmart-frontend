@@ -14,7 +14,7 @@ import PrivateRoute from "./routes/PrivateRoute";
 import { Toaster } from "sonner";
 import Soils from "./components/Soils";
 import Crop from "./components/Crop";
-import Encyclopedia from "./components/Encyclopedia";
+import Agriguide from "./components/Agriguide";
 
 const router = createBrowserRouter([
   {
@@ -86,7 +86,7 @@ const router = createBrowserRouter([
         path: "/agriguide",
         element: (
           <PrivateRoute>
-            <Encyclopedia></Encyclopedia>
+            <Agriguide></Agriguide>
           </PrivateRoute>
         ),
       },

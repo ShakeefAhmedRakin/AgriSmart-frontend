@@ -17,3 +17,9 @@
   ::-webkit-scrollbar-thumb:hover {
     background: #028a5a;
   }
+
+
+  .textarea-auto {
+    resize: none;
+    overflow: hidden;
+  }

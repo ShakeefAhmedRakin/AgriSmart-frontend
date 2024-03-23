@@ -57,6 +57,37 @@ const Community = () => {
     setDisplayedPosts(filteredPosts);
   };
 
+  const createpost = (e) => {
+    e.preventDefault();
+
+    const data = {
+      email: user.email,
+      comments: [],
+      title: e.target.title.value,
+      post: e.target.post_content.value,
+      tag: e.target.tags.value,
+    };
+
+    fetch("http://localhost:5000/make-post", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.insertedId) {
+          toast.success("Post Created!");
+          setReloadData(true);
+        } else {
+          toast.error("Error Occurred");
+        }
+      });
+
+    document.getElementById("createpost").close();
+  };
+
   return (
     <div className="border rounded-2xl min-h-[96vh] p-4">
       <h1 className="text-2xl font-bold">Community Forum</h1>

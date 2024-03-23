@@ -12,7 +12,7 @@ const Equipments = () => {
 
   useEffect(() => {
     setLoading(true);
-    fetch(`http://localhost:5000/equipments/${user.email}`)
+    fetch(`https://agri-smart-backend.vercel.app/equipments/${user.email}`)
       .then((res) => res.json())
       .then((data) => {
         setEquipments(data);
@@ -54,7 +54,7 @@ const Equipments = () => {
       availability: availability,
       quantity: quantity,
     };
-    fetch("http://localhost:5000/equipments", {
+    fetch("https://agri-smart-backend.vercel.app/equipments", {
       method: "POST",
       headers: {
         "Content-Type": "application/json", // Set the content type according to your data

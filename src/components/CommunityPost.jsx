@@ -15,7 +15,7 @@ const CommunityPost = () => {
 
   useEffect(() => {
     setLoading(true);
-    fetch(`http://localhost:5000/get-posts-id/${params.id}`)
+    fetch(`https://agri-smart-backend.vercel.app/get-posts-id/${params.id}`)
       .then((res) => res.json())
       .then((data) => {
         setData(data);
@@ -50,7 +50,7 @@ const CommunityPost = () => {
       comment: comment,
     };
 
-    fetch(`http://localhost:5000/post-comment/${data._id}`, {
+    fetch(`https://agri-smart-backend.vercel.app/post-comment/${data._id}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

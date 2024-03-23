@@ -49,7 +49,7 @@ const Agriguide = () => {
 
     setLoadingAnswer(true);
 
-    fetch("http://localhost:5000/bard_ai", {
+    fetch("https://agri-smart-backend.vercel.app/bard_ai", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -84,7 +84,7 @@ const Agriguide = () => {
       question: question.toUpperCase(),
       answer: answer,
     };
-    fetch("http://localhost:5000/saved", {
+    fetch("https://agri-smart-backend.vercel.app/saved", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -99,7 +99,7 @@ const Agriguide = () => {
 
   const handleDeleteSaved = (id) => {
     setReloadSaved(true);
-    fetch(`http://localhost:5000/saved/${id}`, {
+    fetch(`https://agri-smart-backend.vercel.app/saved/${id}`, {
       method: "DELETE",
     })
       .then((res) => res.json())
@@ -112,7 +112,7 @@ const Agriguide = () => {
 
   useEffect(() => {
     setLoadingSaved(true);
-    fetch(`http://localhost:5000/saved/${user.email}`)
+    fetch(`https://agri-smart-backend.vercel.app/saved/${user.email}`)
       .then((res) => res.json())
       .then((data) => {
         setSaved(data);

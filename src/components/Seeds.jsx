@@ -18,7 +18,7 @@ const Seeds = () => {
 
   useEffect(() => {
     setLoading(true);
-    fetch(`http://localhost:5000/seeds/${user.email}`)
+    fetch(`https://agri-smart-backend.vercel.app/seeds/${user.email}`)
       .then((res) => res.json())
       .then((data) => {
         setSeeds(data);
@@ -36,7 +36,9 @@ const Seeds = () => {
       return;
     }
 
-    fetch(`http://localhost:5000/seeds/${user.email}/${id}/increase/${amount}`)
+    fetch(
+      `https://agri-smart-backend.vercel.app/seeds/${user.email}/${id}/increase/${amount}`
+    )
       .then((res) => res.json())
       .then((data) => {
         if (data.modifiedCount > 0) {
@@ -57,7 +59,7 @@ const Seeds = () => {
             },
           };
 
-          fetch("http://localhost:5000/history", {
+          fetch("https://agri-smart-backend.vercel.app/history", {
             method: "POST",
             headers: {
               "Content-Type": "application/json", // Set the content type according to your data
@@ -105,7 +107,9 @@ const Seeds = () => {
       return;
     }
 
-    fetch(`http://localhost:5000/seeds/${user.email}/${id}/decrease/${amount}`)
+    fetch(
+      `https://agri-smart-backend.vercel.app/seeds/${user.email}/${id}/decrease/${amount}`
+    )
       .then((res) => res.json())
       .then((data) => {
         if (data.modifiedCount > 0) {
@@ -126,7 +130,7 @@ const Seeds = () => {
             },
           };
 
-          fetch("http://localhost:5000/history", {
+          fetch("https://agri-smart-backend.vercel.app/history", {
             method: "POST",
             headers: {
               "Content-Type": "application/json", // Set the content type according to your data
@@ -192,7 +196,7 @@ const Seeds = () => {
       warehouse: warehouse,
     };
 
-    fetch("http://localhost:5000/seeds", {
+    fetch("https://agri-smart-backend.vercel.app/seeds", {
       method: "POST",
       headers: {
         "Content-Type": "application/json", // Set the content type according to your data

@@ -34,7 +34,7 @@ const CropCard = ({ item, setReloadData }) => {
       number: parseInt(e.target.number.value),
     };
 
-    fetch(`http://localhost:5000/crop/addcrop/${item._id}`, {
+    fetch(`https://agri-smart-backend.vercel.app/crop/addcrop/${item._id}`, {
       method: "PUT",
       headers: {
         "content-type": "application/json",

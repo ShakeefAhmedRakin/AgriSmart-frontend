@@ -10,7 +10,7 @@ const History = () => {
 
   useEffect(() => {
     setLoading(true);
-    fetch(`http://localhost:5000/history/${user.email}`)
+    fetch(`https://agri-smart-backend.vercel.app/history/${user.email}`)
       .then((res) => res.json())
       .then((data) => {
         setAllRecords(data);

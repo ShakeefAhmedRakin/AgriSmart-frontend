@@ -12,12 +12,12 @@ const DashboardHome = () => {
   useEffect(() => {
     setLoading(true);
     Promise.all([
-      fetch(`http://localhost:5000/seeds/${user.email}`).then((res) =>
-        res.json()
+      fetch(`https://agri-smart-backend.vercel.app/seeds/${user.email}`).then(
+        (res) => res.json()
       ),
-      fetch(`http://localhost:5000/equipments/${user.email}`).then((res) =>
-        res.json()
-      ),
+      fetch(
+        `https://agri-smart-backend.vercel.app/equipments/${user.email}`
+      ).then((res) => res.json()),
     ])
       .then(([seedsData, equipmentsData]) => {
         setSeeds(seedsData);

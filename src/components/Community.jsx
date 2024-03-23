@@ -24,7 +24,7 @@ const Community = () => {
 
   useEffect(() => {
     setLoading(true);
-    fetch("http://localhost:5000/get-posts")
+    fetch("https://agri-smart-backend.vercel.app/get-posts")
       .then((res) => res.json())
       .then((data) => {
         if (filter === "All") {
@@ -68,7 +68,7 @@ const Community = () => {
       tag: e.target.tags.value,
     };
 
-    fetch("http://localhost:5000/make-post", {
+    fetch("https://agri-smart-backend.vercel.app/make-post", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

@@ -12,7 +12,7 @@ const Crop = () => {
 
   useEffect(() => {
     setLoading(true);
-    fetch(`http://localhost:5000/crops/${user.email}`)
+    fetch(`https://agri-smart-backend.vercel.app/crops/${user.email}`)
       .then((res) => res.json())
       .then((data) => {
         setCrops(data);

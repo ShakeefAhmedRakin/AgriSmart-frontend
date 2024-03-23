@@ -14,7 +14,7 @@ const Soils = () => {
 
   useEffect(() => {
     setLoading(true);
-    fetch(`http://localhost:5000/soils/${user.email}`)
+    fetch(`https://agri-smart-backend.vercel.app/soils/${user.email}`)
       .then((res) => res.json())
       .then((data) => {
         setSoils(data);
@@ -58,7 +58,7 @@ const Soils = () => {
       },
     };
 
-    fetch("http://localhost:5000/soils", {
+    fetch("https://agri-smart-backend.vercel.app/soils", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -76,7 +76,7 @@ const Soils = () => {
         setReloadData(true);
         document.getElementById("addsoilmodal").close();
         console.log("Success:", data);
-        fetch("http://localhost:5000/crops", {
+        fetch("https://agri-smart-backend.vercel.app/crops", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",

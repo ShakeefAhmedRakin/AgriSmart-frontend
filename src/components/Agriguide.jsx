@@ -44,7 +44,7 @@ const Agriguide = () => {
     e.preventDefault();
     setAnswer("test");
     const requestBody = {
-      message: `If the question is related to farming, then answer otherwise do not answer. The question is  "${text}".`,
+      message: `If the question is related to farming or farming tools and machines, then answer otherwise do not answer. The question is  "${text}".`,
     };
 
     setLoadingAnswer(true);
@@ -122,9 +122,9 @@ const Agriguide = () => {
   }, [reloadSaved, user]);
 
   return (
-    <div className="grid grid-cols-2 gap-4">
+    <div className="flex  gap-4">
       {/* CHATBOX */}
-      <div className="border rounded-2xl p-4 space-y-5 h-fit">
+      <div className="border rounded-2xl p-4 space-y-5 h-fit max-w-2xl">
         {/* AI PROMPT */}
         <div className="flex gap-2">
           <div className="p-4 border rounded-full w-fit h-fit">
@@ -174,11 +174,11 @@ const Agriguide = () => {
         {/* AI ANSWER */}
         {loadingAnswer ? (
           <>
-            <div className="flex gap-2  animate-pulse">
+            <div className="flex gap-2 animate-pulse">
               <div className="p-4 border rounded-full w-fit h-fit">
                 <FaSeedling className="text-2xl text-primary"></FaSeedling>
               </div>
-              <div className="flex-1 bg-gray-200 rounded-tr-2xl rounded-bl-2xl rounded-br-2xl p-4 text-gray-600 font-medium"></div>
+              <div className="flex-1 bg-gray-200 rounded-tr-2xl rounded-bl-2xl rounded-br-2xl p-4 text-gray-600 font-medium h-60"></div>
             </div>
           </>
         ) : (
@@ -214,59 +214,69 @@ const Agriguide = () => {
           </>
         )}
       </div>
-      {/* SAVED */}
-      <div className="border rounded-2xl p-4 min-h-[650px] overflow-hidden">
-        <h1 className="font-bold bg-primary text-white p-1 text-center rounded-t-lg mb-2 text-lg">
-          Saved Answers
-        </h1>
-
-        {loadingSaved ? (
-          <>
-            <div className="flex items-center justify-center h-full">
-              <span className="loading loading-bars loading-xl text-black"></span>
-            </div>
-          </>
-        ) : (
-          <>
-            {saved.length > 0 ? (
+      {/* OTHER */}
+      <div className="flex-1">
+        {/* SAVED */}
+        <div className="border rounded-2xl p-4">
+          <h1 className="font-bold bg-primary text-white p-1 text-center rounded-t-lg mb-2 text-lg">
+            Saved Answers
+          </h1>
+          <div className=" h-[600px] overflow-y-scroll">
+            {loadingSaved ? (
               <>
-                <Accordion allowZeroExpanded>
-                  {saved.map((item) => (
-                    <AccordionItem key={item._id}>
-                      <AccordionItemHeading>
-                        <AccordionItemButton
-                          style={{
-                            backgroundColor: "white",
-                            position: "relative",
-                          }}
-                        >
-                          {item.question}
-                          <div className="absolute right-2 top-0 bottom-0 justify-center flex items-center z-50">
-                            <button
-                              className=" bg-red-500 text-white hover:bg-red-600 btn btn-sm"
-                              onClick={() => handleDeleteSaved(item._id)}
-                            >
-                              <MdDeleteForever className="text-xl"></MdDeleteForever>
-                            </button>
-                          </div>
-                        </AccordionItemButton>
-                      </AccordionItemHeading>
-                      <AccordionItemPanel>
-                        <Markdown>{item.answer}</Markdown>
-                      </AccordionItemPanel>
-                    </AccordionItem>
-                  ))}
-                </Accordion>
+                <div className="flex items-center justify-center h-full">
+                  <span className="loading loading-bars loading-xl text-black"></span>
+                </div>
               </>
             ) : (
               <>
-                <div className="flex justify-center items-center h-full text-secondary font-bold">
-                  No Answers Saved Yet!
-                </div>
+                {saved.length > 0 ? (
+                  <>
+                    <Accordion allowZeroExpanded>
+                      {saved.map((item) => (
+                        <AccordionItem key={item._id}>
+                          <AccordionItemHeading>
+                            <AccordionItemButton
+                              style={{
+                                backgroundColor: "white",
+                                position: "relative",
+                              }}
+                            >
+                              {item.question}
+                              <div className="absolute right-2 top-0 bottom-0 justify-center flex items-center z-50">
+                                <button
+                                  className=" bg-red-500 text-white hover:bg-red-600 btn btn-sm"
+                                  onClick={() => handleDeleteSaved(item._id)}
+                                >
+                                  <MdDeleteForever className="text-xl"></MdDeleteForever>
+                                </button>
+                              </div>
+                            </AccordionItemButton>
+                          </AccordionItemHeading>
+                          <AccordionItemPanel>
+                            <Markdown>{item.answer}</Markdown>
+                          </AccordionItemPanel>
+                        </AccordionItem>
+                      ))}
+                    </Accordion>
+                  </>
+                ) : (
+                  <>
+                    <div className="flex justify-center items-center h-full text-secondary font-bold">
+                      No Answers Saved Yet!
+                    </div>
+                  </>
+                )}
               </>
             )}
-          </>
-        )}
+          </div>
+        </div>
+        {/* INFO */}
+        <div className="border rounded-2xl p-4 mt-4">
+          <h1 className="font-bold bg-secondary text-white p-1 text-center rounded-t-lg mb-2 text-lg">
+            Saved Answers
+          </h1>
+        </div>
       </div>
     </div>
   );

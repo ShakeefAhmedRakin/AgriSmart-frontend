@@ -15,6 +15,8 @@ import { Toaster } from "sonner";
 import Soils from "./components/Soils";
 import Crop from "./components/Crop";
 import Agriguide from "./components/Agriguide";
+import Community from "./components/Community";
+import CommunityPost from "./components/CommunityPost";
 
 const router = createBrowserRouter([
   {
@@ -39,6 +41,22 @@ const router = createBrowserRouter([
         element: (
           <PrivateRoute>
             <Seeds></Seeds>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/community",
+        element: (
+          <PrivateRoute>
+            <Community></Community>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/community/post/:id",
+        element: (
+          <PrivateRoute>
+            <CommunityPost></CommunityPost>
           </PrivateRoute>
         ),
       },

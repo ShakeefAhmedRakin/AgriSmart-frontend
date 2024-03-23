@@ -12,6 +12,7 @@ import { PiPlant } from "react-icons/pi";
 import { GiPlantSeed } from "react-icons/gi";
 import { GoTools } from "react-icons/go";
 import { CiLogout } from "react-icons/ci";
+import { MdOutlineForum } from "react-icons/md";
 
 const Root = () => {
   const { user, logOut } = useAuth();
@@ -106,6 +107,22 @@ const Root = () => {
                     }`}
                   >
                     AgriGuide
+                  </li>
+                </NavLink>
+                <NavLink
+                  to={"/community"}
+                  onClick={closeSidebar}
+                  className={`p-2 w-full border-2 hover:underline rounded-xl flex items-center gap-2 ${
+                    location.pathname === "/community" ? "font-bold" : ""
+                  }`}
+                >
+                  <MdOutlineForum className="text-primary text-2xl"></MdOutlineForum>
+                  <li
+                    className={`duration-300 flex  ${
+                      location.pathname === "/community" ? "text-primary" : ""
+                    }`}
+                  >
+                    Community
                   </li>
                 </NavLink>
                 <hr />

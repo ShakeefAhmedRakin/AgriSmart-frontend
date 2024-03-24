@@ -27,6 +27,9 @@ const DashboardHome = () => {
     max = Math.floor(max);
     return Math.floor(Math.random() * (max - min + 1)) + min;
   }
+  function getRandomFloat(min, max) {
+    return parseFloat((Math.random() * (max - min) + min).toFixed(1));
+  }
 
   useEffect(() => {
     setLoading(true);
@@ -100,30 +103,114 @@ const DashboardHome = () => {
         </div>
       </div>
       <hr className="my-4" />
-      <div className="flex justify-between gap-4">
-        <div className="border rounded-2xl p-2 flex-1"></div>
+      <div className="space-y-4">
         <div className="border rounded-2xl p-2 flex-1">
-          <h1 className="font-bold text-2xl text-center">Seed Storage</h1>
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-6">
-            {seeds.map((item) => (
-              <div key={item.id}>
-                <hr className="my-2" />
-                <div className="ml-1 flex flex-col lg:flex-row items-center gap-2 text-sm whitespace-nowrap">
-                  <h1 className="font-bold">{item.name}</h1>
-                  <h1>Current Volume: {item.volume} kg</h1>
-                  <h1>Max Capacity: {item.capacity} kg</h1>
-                </div>
-                <progress
-                  className={`progress ${
-                    item.volume / item.capacity < 0.3 ? "progress-error" : ""
-                  } h-3 mt-2 progress-success w-[100%]`}
-                  value={item.volume}
-                  max={item.capacity}
-                ></progress>
+          <div className="overflow-x-auto">
+            <table className="table">
+              {/* head */}
+              <thead>
+                <tr>
+                  <th>Container Name</th>
+                  <th>Number of Crops</th>
+                  <th>Expected Yield</th>
+                  <th>Bugs</th>
+                  <th>Health</th>
+                  <th>Soil Conditions</th>
+                </tr>
+              </thead>
+              <tbody>
+                {crops.map((item) => (
+                  <tr key={item._id}>
+                    <td>{item.name}</td>
+                    <td>{item.number}</td>
+                    <td className="font-medium">{getRandomInt(3, 7)}</td>
+                    <td className="font-medium text-xs">
+                      {getRandomInt(0, 1) ? (
+                        <span className="text-red-600">
+                          DETECTED ({getRandomInt(1, 4)})
+                        </span>
+                      ) : (
+                        <span className="text-green-600">NONE</span>
+                      )}
+                    </td>
+                    <td className="font-medium text-xs">
+                      {getRandomInt(0, 1) ? (
+                        <span className="text-green-600">HEALTHY</span>
+                      ) : (
+                        <span className="text-red-600">
+                          UNHEALTHY ({getRandomInt(1, 4)})
+                        </span>
+                      )}
+                    </td>
+                    <td className="font-medium text-xs">
+                      {getRandomFloat(22, 28)}°C | {getRandomFloat(0, 100)} g/m³
+                      | {getRandomInt(0, 14)} pH
+                    </td>
+                    <td className="font-medium text-xs">
+                      ~ {getRandomInt(0, 5)} minutes ago
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div className="grid grid-cols-2 gap-4">
+          <div className="border rounded-2xl p-2 flex-1">
+            <h1 className="font-bold text-2xl text-center">Seed Storage</h1>
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-6">
+              {seeds.map((item) => (
+                <div key={item.id}>
+                  <hr className="my-2" />
+                  <div className="ml-1 flex flex-col lg:flex-row items-center gap-2 text-sm whitespace-nowrap">
+                    <h1 className="font-bold">{item.name}</h1>
+                    <h1>Current Volume: {item.volume} kg</h1>
+                    <h1>Max Capacity: {item.capacity} kg</h1>
+                  </div>
+                  <progress
+                    className={`progress ${
+                      item.volume / item.capacity < 0.3 ? "progress-error" : ""
+                    } h-3 mt-2 progress-success w-[100%]`}
+                    value={item.volume}
+                    max={item.capacity}
+                  ></progress>
 
-                <hr className="my-2" />
-              </div>
-            ))}
+                  <hr className="my-2" />
+                </div>
+              ))}
+            </div>
+          </div>
+          <div className="border rounded-2xl p-2 flex-1">
+            <h1 className="font-bold text-2xl text-center">
+              Equipment Storage
+            </h1>
+            <div className="mt-2">
+              <table className="table">
+                {/* head */}
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Quantity</th>
+                    <th>Status</th>
+                    <th>Availability</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {equipments.map((item) => (
+                    <tr key={item._id}>
+                      <td>{item.name}</td>
+                      <td className="font-medium text-xs">{item.quantity}</td>
+                      <td className="font-medium text-xs">
+                        {item.availability}
+                      </td>
+                      <td className="font-medium text-xs">
+                        {item.loaned ? "LOANED" : "OWNED"}
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
           </div>
         </div>
       </div>

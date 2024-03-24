@@ -1,9 +1,9 @@
 /* eslint-disable react/jsx-key */
 /* eslint-disable react/no-unescaped-entities */
 /* eslint-disable no-unused-vars */
-import React, { useEffect, useState } from 'react'
-import { Disclosure } from '@headlessui/react'
-import { ChevronUpIcon } from '@heroicons/react/20/solid'
+import React, { useEffect, useState } from "react";
+import { Disclosure } from "@headlessui/react";
+import { ChevronUpIcon } from "@heroicons/react/20/solid";
 
 const argiSteps = [
     {
@@ -108,8 +108,8 @@ const AgriSteps = () => {
 //   }, [])
   console.log(argiSteps)
   return (
-    <div className='w-full px-4 pt-5 '>
-      <p className='text-center text-2xl mb-10 font-medium'>
+    <div className="w-full px-4 pt-5 ">
+      <p className="text-center text-2xl mb-10 font-medium">
         10 Essential Tips for Beginner Farmers: A Beginner's Guide to Nurturing
         a Successful Farm
       </p>
@@ -147,7 +147,7 @@ const AgriSteps = () => {
 
     </section>
     </div>
-  )
-}
+  );
+};
 
-export default AgriSteps
+export default AgriSteps;

@@ -1,13 +1,32 @@
-import { useEffect, useState } from "react"; // Import useState
+import { useEffect, useState } from "react";
 import useAuth from "../hooks/useAuth";
+import React, { PureComponent } from "react";
+import {
+  BarChart,
+  Bar,
+  Rectangle,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  Legend,
+  ResponsiveContainer,
+} from "recharts";
 
 const DashboardHome = () => {
   const [loading, setLoading] = useState(true);
   const [seeds, setSeeds] = useState([]);
   const [equipments, setEquipments] = useState([]);
+  const [crops, setCrops] = useState([]);
   const [lowCount, setLowCount] = useState(0);
 
   const { user } = useAuth();
+
+  function getRandomInt(min, max) {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+  }
 
   useEffect(() => {
     setLoading(true);
@@ -18,10 +37,14 @@ const DashboardHome = () => {
       fetch(
         `https://agri-smart-backend.vercel.app/equipments/${user.email}`
       ).then((res) => res.json()),
+      fetch(`https://agri-smart-backend.vercel.app/crops/${user.email}`).then(
+        (res) => res.json()
+      ),
     ])
-      .then(([seedsData, equipmentsData]) => {
+      .then(([seedsData, equipmentsData, cropsData]) => {
         setSeeds(seedsData);
         setEquipments(equipmentsData);
+        setCrops(cropsData);
         setLowCount(
           seedsData.filter((item) => item.volume / item.capacity < 0.3).length
         );

@@ -1,17 +1,5 @@
 import { useEffect, useState } from "react";
 import useAuth from "../hooks/useAuth";
-import React, { PureComponent } from "react";
-import {
-  BarChart,
-  Bar,
-  Rectangle,
-  XAxis,
-  YAxis,
-  CartesianGrid,
-  Tooltip,
-  Legend,
-  ResponsiveContainer,
-} from "recharts";
 
 const DashboardHome = () => {
   const [loading, setLoading] = useState(true);
@@ -105,12 +93,15 @@ const DashboardHome = () => {
       <hr className="my-4" />
       <div className="space-y-4">
         <div className="border rounded-2xl p-2 flex-1">
+          <h1 className="font-bold text-2xl text-center my-3">
+            Crop Monitoring
+          </h1>
           <div className="overflow-x-auto">
             <table className="table">
               {/* head */}
               <thead>
                 <tr>
-                  <th>Container Name</th>
+                  <th>Name</th>
                   <th>Number of Crops</th>
                   <th>Expected Yield</th>
                   <th>Bugs</th>
@@ -162,7 +153,7 @@ const DashboardHome = () => {
               {seeds.map((item) => (
                 <div key={item.id}>
                   <hr className="my-2" />
-                  <div className="ml-1 flex flex-col lg:flex-row items-center gap-2 text-sm whitespace-nowrap">
+                  <div className="ml-1 flex flex-col lg:flex-row items-center gap-2 text-xs">
                     <h1 className="font-bold">{item.name}</h1>
                     <h1>Current Volume: {item.volume} kg</h1>
                     <h1>Max Capacity: {item.capacity} kg</h1>

@@ -227,7 +227,7 @@ const Community = () => {
                   type="text"
                   name="post_content"
                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-xl focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "
-                  placeholder="Soil Type"
+                  placeholder="Post Body"
                   required
                 />
               </div>

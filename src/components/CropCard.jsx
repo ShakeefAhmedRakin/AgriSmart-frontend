@@ -7,6 +7,10 @@ import { MdPestControl } from "react-icons/md";
 import { FaLightbulb } from "react-icons/fa";
 import { BsBug } from "react-icons/bs";
 import { Tooltip } from "react-tooltip";
+import { GiKiwiFruit } from "react-icons/gi";
+import { IoIosLeaf } from "react-icons/io";
+import { FaInfoCircle } from "react-icons/fa";
+import { GiHealthNormal } from "react-icons/gi";
 
 const CropCard = ({ item, setReloadData }) => {
   const [showaddUI, setShowAddUI] = useState(false);
@@ -46,6 +50,8 @@ const CropCard = ({ item, setReloadData }) => {
         if (data.modifiedCount > 0) {
           toast.success("Crop has been added successfully.");
           setReloadData(true);
+        } else {
+          toast.error("Error Occurred!");
         }
       });
   };
@@ -109,18 +115,44 @@ const CropCard = ({ item, setReloadData }) => {
     const hasPest = getRandomInt(0, 1);
     const moisture = getRandomFloat(50, 100);
     const temp = getRandomFloat(20, 30);
+    const isHealthy = getRandomInt(0, 1);
 
     info.push(
       <>
-        <div className="grid grid-cols-3 gap-2 border rounded-2xl p-2 relative">
+        <div className="space-y-2 border rounded-2xl p-2 relative">
           {/* VIDEO FEED */}
-          <img
-            src="/plantgif.gif"
-            className="object-cover w-full rounded-2xl h-full"
-          />
+          <div className="grid grid-cols-2 gap-2">
+            <div className="relative">
+              <img
+                src={`/` + getRandomInt(1, 5).toString() + ".PNG"}
+                className="object-cover rounded-xl h-[300px] w-full"
+              />
+              <div className="absolute bottom-2 right-2 badge border-none bg-red-600 text-white">
+                {getRandomInt(0, 2)}:{getRandomInt(0, 5)}
+                {getRandomInt(0, 5)}
+              </div>
+              <div className="absolute top-2 left-2 badge border-none bg-black text-white">
+                CROP CAM
+              </div>
+            </div>
+            <div className="relative">
+              <img
+                src={`/leaf` + getRandomInt(1, 4).toString() + ".PNG"}
+                className="object-cover rounded-xl h-[300px] w-full"
+              />
+              <div className="absolute bottom-2 right-2 badge border-none bg-red-600 text-white">
+                {getRandomInt(1, 5)}:{getRandomInt(0, 5)}
+                {getRandomInt(0, 5)}
+              </div>
+              <div className="absolute top-2 left-2 badge border-none bg-black text-white">
+                LEAF CAM
+              </div>
+            </div>
+          </div>
+          <hr />
           {/* STATS */}
-          <div className="space-y-2 col-span-2">
-            <div className="py-3 w-full px- rounded-xl border flex gap-6 justify-center">
+          <div className="space-y-2 relative">
+            <div className="py-3 w-full px- rounded-xl flex gap-6 justify-center">
               <div
                 className="flex justify-center items-center py-4 gap-1 min-w-28"
                 data-tooltip-id="temp-tip"
@@ -139,13 +171,45 @@ const CropCard = ({ item, setReloadData }) => {
                 <span className="text-base font-medium">{moisture} g/m³</span>
                 <Tooltip id="moisture-tip" className="max-w-xs" />
               </div>
-              <h1 className="ml-2 text-xs flex items-center gap-1 min-w-28 font-medium justify-center">
-                <span className="text-gray-500">
-                  ~ {getRandomInt(0, 5)} minutes ago
+              <div
+                className="flex justify-center items-center py-4 gap-1 min-w-28"
+                data-tooltip-id="fruit-tip"
+                data-tooltip-html="Expected yield detection is like predicting how many fruits or vegetables you'll get from your plants. It helps you plan and prepare for harvest by estimating how much produce you can expect. By knowing your expected yield, you can make informed decisions about planting, watering, and fertilizing to maximize your crop's productivity."
+              >
+                <GiKiwiFruit className="text-3xl text-red-500"></GiKiwiFruit>
+                <span className="text-base font-medium">
+                  {getRandomInt(3, 6)} Tomatoes
                 </span>
-              </h1>
+                <Tooltip id="fruit-tip" className="max-w-xs" />
+              </div>
+              <div
+                className="flex justify-center items-center py-4 gap-1 min-w-28"
+                data-tooltip-id="leaf-tip"
+                data-tooltip-html="Leaf detection is like using a magnifying glass to check your plant's leaves. It helps you spot any problems early, like bugs, diseases, or nutrient deficiencies. By paying attention to your leaves, you can keep your plants healthy and thriving!"
+              >
+                <IoIosLeaf className="text-3xl text-green-600"></IoIosLeaf>
+                <span className="text-base font-medium">
+                  {getRandomInt(1, 5)} Spots
+                </span>
+                <Tooltip id="leaf-tip" className="max-w-xs" />
+              </div>
+              <div
+                className="flex justify-center items-center py-4 gap-1 min-w-28"
+                data-tooltip-id="health-tip"
+                data-tooltip-html="Plant health detection is like checking your plant's vital signs. It helps you monitor your plants' overall well-being by identifying any signs of stress, disease, or nutrient deficiencies. By keeping an eye on your plant's health, you can take proactive measures to keep them happy and thriving, ensuring a successful harvest."
+              >
+                <GiHealthNormal className="text-xl text-red-500"></GiHealthNormal>
+                <span
+                  className={`text-xs ${
+                    isHealthy ? "text-green-500" : "text-red-500"
+                  } font-bold`}
+                >
+                  {isHealthy ? "HEALTHY" : "UNHEALTHY"}
+                </span>
+                <Tooltip id="health-tip" className="max-w-xs" />
+              </div>
             </div>
-            <div className="py-3 w-full px- rounded-xl border flex gap-6 justify-center">
+            <div className="py-3 w-full px- rounded-xl flex gap-6 justify-center">
               <div
                 className="flex justify-center items-center py-4 gap-2  min-w-28"
                 data-tooltip-id={plantStage[randomIndex][0].name}
@@ -191,10 +255,23 @@ const CropCard = ({ item, setReloadData }) => {
                   ON
                 </span>
               </div>
+              <h1 className="ml-2 text-xs flex items-center gap-1 min-w-28 font-medium justify-center">
+                <span className="text-gray-500">
+                  ~ {getRandomInt(0, 5)} minutes ago
+                </span>
+              </h1>
+            </div>
+            <div
+              className="absolute top-0 right-2 text-xl text-gray-700"
+              data-tooltip-id="info-tip"
+              data-tooltip-html="Highlight over sensor information to understand them better!"
+            >
+              <FaInfoCircle></FaInfoCircle>
+              <Tooltip id="info-tip" className="max-w-xs" />
             </div>
           </div>
           {/* ALERTS */}
-          <div className="absolute -right-1 -top-2 flex gap-1">
+          <div className="absolute -right-3 -top-6 flex gap-1">
             {moisture < 65 && (
               <div
                 className="bg-red-500 p-1.5 rounded-full border-0 tooltip tooltip-error tooltip-left"
@@ -245,6 +322,9 @@ const CropCard = ({ item, setReloadData }) => {
           </span>
           <span className="bg-yellow-700 text-yellow-700 bg-opacity-30 p-2 rounded-xl font-bold">
             {item?.crop_name}
+          </span>
+          <span className="bg-yellow-700 text-yellow-700 bg-opacity-30 p-2 rounded-xl font-bold">
+            {item?.number} Crops
           </span>
         </div>
         <hr className="my-2" />

@@ -8,7 +8,7 @@ import { ChevronUpIcon } from "@heroicons/react/20/solid";
 const AgriSteps = () => {
   const [argiSteps, setRgiSteps] = useState();
   useEffect(() => {
-    fetch("../../agristeps.json")
+    fetch("/agristeps.json")
       .then((res) => res.json())
       .then((data) => setRgiSteps(data));
   }, []);
